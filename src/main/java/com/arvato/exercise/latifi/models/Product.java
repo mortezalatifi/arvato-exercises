@@ -1,15 +1,18 @@
 package com.arvato.exercise.latifi.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public class Product {
+    @JsonProperty("ddat")
     private String name;
     private String countryOfOrigin;
     private BigDecimal price;
     private boolean isFragile;
-    private long timesPurchased;
+    private int timesPurchased;
 
-    public Product(String name, String countryOfOrigin, BigDecimal price, boolean isFragile, long timesPurchased) {
+    public Product(String name, String countryOfOrigin, BigDecimal price, boolean isFragile, int timesPurchased) {
         this.name = name;
         this.countryOfOrigin = countryOfOrigin;
         this.price = price;
@@ -49,11 +52,22 @@ public class Product {
         isFragile = fragile;
     }
 
-    public long getTimesPurchased() {
+    public int getTimesPurchased() {
         return timesPurchased;
     }
 
-    public void setTimesPurchased(long timesPurchased) {
+    public void setTimesPurchased(int timesPurchased) {
         this.timesPurchased = timesPurchased;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", countryOfOrigin='" + countryOfOrigin + '\'' +
+                ", price=" + price +
+                ", isFragile=" + isFragile +
+                ", timesPurchased=" + timesPurchased +
+                '}';
     }
 }
