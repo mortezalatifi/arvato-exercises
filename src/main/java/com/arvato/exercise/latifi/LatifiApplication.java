@@ -32,6 +32,7 @@ public class LatifiApplication implements CommandLineRunner {
     @Autowired
     ListComparatorService listComparatorService;
 
+
     public static void main(String[] args) {
         SpringApplication.run(LatifiApplication.class, args);
     }
@@ -69,9 +70,9 @@ public class LatifiApplication implements CommandLineRunner {
 //        flears.add(new Flear("Flear 3", 2, 140));
 //        flears.add(new Flear("Flear 3", 5, 150));
 
-        System.out.println("Knapsack test:");
-        System.out.println(
-                Solution.getOptimalValue(15, flears)
-        );
+//        System.out.println("Knapsack test:");
+//        System.out.println(
+//                Solution.getOptimalValue(15, flears)
+//        );
     }
 }
