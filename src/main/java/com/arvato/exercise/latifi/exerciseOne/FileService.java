@@ -2,7 +2,7 @@
 A Service Class that works with the filesystem
 */
 
-package com.arvato.exercise.latifi.services;
+package com.arvato.exercise.latifi.exerciseOne;
 
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
-package com.arvato.exercise.latifi.services.product;
+package com.arvato.exercise.latifi.exerciseTwo.services;
 
-import com.arvato.exercise.latifi.models.Product;
+import com.arvato.exercise.latifi.exerciseTwo.models.Product;
+import com.arvato.exercise.latifi.exerciseTwo.productStrategyPattern.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,12 @@ public class ProductService {
         return products.get(0);
     }
 
+    public Product getMostPopularProduct(ArrayList<Product> products) {
+        ProductContext productContext = new ProductContext(new SortProductByTimePurchased());
+        productContext.executeStrategy(products);
+        return products.get(products.size() - 1);
+    }
+
     public ArrayList<Product> getProductsByCountry(ArrayList<Product> products, String country) {
         ProductContext productContext;
         switch (country) {
@@ -32,5 +39,10 @@ public class ProductService {
             default:
                 return null;
         }
+    }
+
+    public boolean containsFragile(ArrayList<Product> products) {
+        ProductContext productContext = new ProductContext(new GetAllFragileProducts());
+        return productContext.executeStrategy(products).size() > 0 ? true : false;
     }
 }

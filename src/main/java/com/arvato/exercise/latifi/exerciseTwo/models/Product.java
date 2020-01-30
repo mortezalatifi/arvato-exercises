@@ -1,4 +1,4 @@
-package com.arvato.exercise.latifi.models;
+package com.arvato.exercise.latifi.exerciseTwo.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

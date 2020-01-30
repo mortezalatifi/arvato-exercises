@@ -1,10 +1,8 @@
-package com.arvato.exercise.latifi.services.product;
+package com.arvato.exercise.latifi.exerciseTwo.productStrategyPattern;
 
-import com.arvato.exercise.latifi.models.Product;
+import com.arvato.exercise.latifi.exerciseTwo.models.Product;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class GetAllGermanProducts implements ProductStrategy {
