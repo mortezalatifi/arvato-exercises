@@ -6,43 +6,103 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/**
+ * <h1>Product Service</h1>
+ * The product service class that does the followings:
+ *      - Get the most expensive product
+ *      - Get the cheapest product
+ *      - Get the most and least popular products
+ *      - Get products by country
+ *      - Checks if there are any fragile products in the list
+ */
+
 @Service
 public class ProductService {
 
+    /**
+     * Gets the most expensive product using the sorted product list by price
+     * @param products This is the list of products as method parameter
+     * @return Product This is the most expensive product
+     */
     public Product getMostExpensiveProduct(ArrayList<Product> products) {
-        ProductContext productContext = new ProductContext(new SortProductByPrice());
-        productContext.executeStrategy(products);
+        // Throwing exception if products is not valid
+        if (products == null || products.size() <= 1)
+            throw new IllegalArgumentException("Product list = null or with size < 1 not allowed!");
+
+        // Getting the most expensive product
+        ProductStrategyPatternContext productStrategyPatternContext = new ProductStrategyPatternContext(new SortProductByPrice());
+        productStrategyPatternContext.executeStrategy(products);
         return products.get(products.size() - 1);
     }
 
+    /**
+     * Gets the cheapest product using the sorted product list by price
+     * @param products This is the list of products as method parameter
+     * @return Product This is the cheapest product
+     */
     public Product getCheapestProduct(ArrayList<Product> products) {
-        ProductContext productContext = new ProductContext(new SortProductByPrice());
-        productContext.executeStrategy(products);
+        // Throwing exception if products is not valid
+        if (products == null || products.size() <= 1)
+            throw new IllegalArgumentException("Product list = null or with size < 1 not allowed!");
+
+        // Getting the cheapest product
+        ProductStrategyPatternContext productStrategyPatternContext = new ProductStrategyPatternContext(new SortProductByPrice());
+        productStrategyPatternContext.executeStrategy(products);
         return products.get(0);
     }
 
+    /**
+     * Gets the most popular product using the sorted product list by times purchased
+     * @param products This is the list of products as method parameter
+     * @return Product This is the most popular product
+     */
     public Product getMostPopularProduct(ArrayList<Product> products) {
-        ProductContext productContext = new ProductContext(new SortProductByTimePurchased());
-        productContext.executeStrategy(products);
+        // Throwing exception if products is not valid
+        if (products == null || products.size() <= 1)
+            throw new IllegalArgumentException("Product list = null or with size < 1 not allowed!");
+
+        // Getting the most popular product
+        ProductStrategyPatternContext productStrategyPatternContext = new ProductStrategyPatternContext(new SortProductByTimePurchased());
+        productStrategyPatternContext.executeStrategy(products);
         return products.get(products.size() - 1);
     }
 
+    /**
+     * Gets the least popular product using the sorted product list by times purchased
+     * @param products This is the list of products as method parameter
+     * @return Product This is the least popular product
+     */
     public ArrayList<Product> getProductsByCountry(ArrayList<Product> products, String country) {
-        ProductContext productContext;
+        // Throwing exception if products is not valid
+        if (products == null)
+            throw new IllegalArgumentException("Product list = null not allowed!");
+
+        // Getting the products by country
+        ProductStrategyPatternContext productStrategyPatternContext;
         switch (country) {
             case "Germany":
-                productContext = new ProductContext(new GetAllGermanProducts());
-                return productContext.executeStrategy(products);
+                productStrategyPatternContext = new ProductStrategyPatternContext(new GetAllGermanProducts());
+                return productStrategyPatternContext.executeStrategy(products);
             case "China":
-                productContext = new ProductContext(new GetAllChineseProducts());
-                return productContext.executeStrategy(products);
+                productStrategyPatternContext = new ProductStrategyPatternContext(new GetAllChineseProducts());
+                return productStrategyPatternContext.executeStrategy(products);
             default:
                 return null;
         }
     }
 
+    /**
+     * Gets the list of fragile products. If the list is not null returns true, else false
+     * @param products This is the list of products as method parameter
+     * @return boolean This is the true or false
+     */
     public boolean containsFragile(ArrayList<Product> products) {
-        ProductContext productContext = new ProductContext(new GetAllFragileProducts());
-        return productContext.executeStrategy(products).size() > 0 ? true : false;
+        // Throwing exception if products is not valid
+        if (products == null)
+            throw new IllegalArgumentException("Product list = null not allowed!");
+
+        // Getting the fragile products
+        ProductStrategyPatternContext productStrategyPatternContext = new ProductStrategyPatternContext(new GetAllFragileProducts());
+        return productStrategyPatternContext.executeStrategy(products).size() > 0 ? true : false;
     }
 }

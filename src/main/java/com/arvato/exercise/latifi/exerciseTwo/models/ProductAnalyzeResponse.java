@@ -2,6 +2,10 @@ package com.arvato.exercise.latifi.exerciseTwo.models;
 
 import java.util.ArrayList;
 
+/**
+ * The Implementation of the ProductAnalyzeResponse which
+ * will be returned as the response of the text/analyze api
+ */
 public class ProductAnalyzeResponse {
     private String mostExpensiveProduct;
     private String cheapestProduct;

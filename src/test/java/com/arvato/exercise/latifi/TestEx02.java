@@ -1,6 +1,5 @@
 package com.arvato.exercise.latifi;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,14 +12,18 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * A test class to test the exercise 02.
+ * To test this exercise the json data of the sampleProductsData.json will be sent
+ * to the api and the response will be compared with the expected response!
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestEx02 {
@@ -28,25 +31,27 @@ public class TestEx02 {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private Utility utility;
-
     private String requestURL = "/text/analyze";
 
     private MockMvc mockMvc;
 
-    public TestEx02() throws IOException {
-    }
+    public TestEx02() throws IOException {}
 
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+    /**
+     * The test method that sends a post request to text/analyze and
+     * first checks the response code and then compares the response with the expected value!
+     * @throws Exception
+     */
     @Test
     public void test() throws Exception {
-        String content = utility.fileToString("arvato/sampleProductsData.json");
+        String content = fileToString("arvato/sampleProductsData.json"); // Sending content
 
+        // Sending the query as a POST request
         MvcResult mvcResult = mockMvc.perform(post(requestURL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
@@ -62,6 +67,16 @@ public class TestEx02 {
 
         String response = mvcResult.getResponse().getContentAsString();
         assertEquals(expectedResponse, response);
+    }
+
+    public String fileToString(String path) throws IOException {
+        File file = new File(path);
+        FileInputStream fis = new FileInputStream(file);
+        byte[] data = new byte[(int) file.length()];
+        fis.read(data);
+        fis.close();
+
+        return new String(data);
     }
 
 }

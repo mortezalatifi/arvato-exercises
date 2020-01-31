@@ -2,6 +2,9 @@ package com.arvato.exercise.latifi.exerciseThree;
 
 import java.util.Objects;
 
+/**
+ * The implementation of the Flear object
+ */
 public class Flear {
 
     String name;

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
+/**
+ * The Implementation of the Product Class
+ */
 public class Product {
     @JsonProperty("ddat")
     private String name;
